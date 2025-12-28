@@ -86,6 +86,7 @@ function signUp() {
 }
 
 var userimg = document.getElementById("userimg")
+var userImgUrl;
 
 function uploadimg() {
     console.log(userimg.files[0].size)
@@ -111,7 +112,13 @@ function uploadimg() {
 
         fetch("https://api.cloudinary.com/v1_1/da8cjlsun/image/upload", requestOptions)
             .then((response) => response.json())
-            .then((result) => console.log(result))
+            .then((result) => {
+                console.log(result.secure_url)
+                userImgUrl = result.secure_url
+            
+        
+            })
+            
             .catch((error) => console.error(error));
     }
 
