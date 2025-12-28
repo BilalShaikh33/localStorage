@@ -8,6 +8,8 @@ function setData (){
 }
 setData()
 
+
+
 function signUp() {
 
     var email = document.getElementById("email").value
@@ -82,6 +84,23 @@ function signUp() {
        localStorage.setItem("USERDATA" , JSON.stringify(userObj))
     }}
 
+var userimg = document.getElementById("userimg")
+
+function uploadimg(){
+console.log(userimg.files[0].size)
+var imgSize = userimg.files[0].size /1024/1024
+console.log(imgSize)
+
+if (imgSize < 2) {
+    console.log("Your file is okay")
+
+    
+}
+else{
+    console.log("please select image less than 2 mb ")
+}
+
+}
 
 
 
