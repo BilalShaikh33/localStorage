@@ -1,10 +1,10 @@
 
 var userObj = []
-function setData (){
-   var users =  localStorage.getItem("USERDATA")
-   console.log(users)
-   console.log(JSON.parse(users))
-   userObj = JSON.parse(users)|| []
+function setData() {
+    var users = localStorage.getItem("USERDATA")
+    console.log(users)
+    console.log(JSON.parse(users))
+    userObj = JSON.parse(users) || []
 }
 setData()
 
@@ -80,29 +80,43 @@ function signUp() {
             onClick: function () { } // Callback after click
         }).showToast();
         email.value = ""
-        password.value = "" 
-       localStorage.setItem("USERDATA" , JSON.stringify(userObj))
-    }}
+        password.value = ""
+        localStorage.setItem("USERDATA", JSON.stringify(userObj))
+    }
+}
 
 var userimg = document.getElementById("userimg")
 
-function uploadimg(){
-console.log(userimg.files[0].size)
-var imgSize = userimg.files[0].size /1024/1024
-console.log(imgSize)
+function uploadimg() {
+    console.log(userimg.files[0].size)
+    var imgSize = userimg.files[0].size / 1024 / 1024
+    console.log(imgSize)
 
-if (imgSize < 2) {
-    console.log("Your file is okay")
+    if (imgSize > 2) {
 
-    
+        console.log("please select image less than 2 mb ")
+
+
+    }
+    else {
+        const formdata = new FormData();
+        formdata.append("file", userimg.files[0],);
+        formdata.append("upload_preset", "Storage-admin-ecom");
+
+        const requestOptions = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow"
+        };
+
+        fetch("https://api.cloudinary.com/v1_1/da8cjlsun/image/upload", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+    }
+
+
 }
-else{
-    console.log("please select image less than 2 mb ")
-}
-
-}
-
-
 
 
 
