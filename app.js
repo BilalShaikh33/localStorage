@@ -110,7 +110,7 @@ function uploadimg() {
         };
 
         fetch("https://api.cloudinary.com/v1_1/da8cjlsun/image/upload", requestOptions)
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
     }
